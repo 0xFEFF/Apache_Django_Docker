@@ -1,0 +1,48 @@
+https://docs.docker.com/engine/install/ubuntu/
+
+#clean up before reinstall
+sudo apt-get remove docker docker-engine docker.io containerd runc
+
+#update packages
+sudo apt-get update
+
+#install requirements for docker
+sudo apt-get install \
+    apt-transport-https \
+    ca-certificates \
+    curl \
+    gnupg-agent \
+    software-properties-common
+
+#add docker GPG key
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+
+#verify fingerprint
+sudo apt-key fingerprint 0EBFCD88
+
+#set up stable repository
+sudo add-apt-repository \
+   "deb [arch=amd64] https://download.docker.com/linux/ubuntu \
+   $(lsb_release -cs) \
+   stable"
+
+    #problems
+    cd /etc/apt/sources.list and add xenial
+
+#update packages again
+sudo apt-get update
+
+#install docker
+sudo apt-get install docker-ce docker-ce-cli containerd.io
+
+#install specific version
+apt-cache madison docker-ce
+
+sudo apt-get install docker-ce=<from cache> docker-ce-cli=<from cache> containerd.io
+
+#add docker user to system
+sudo groupadd docker
+
+sudo usermod -aG docker $USER
+
+newgrp docker 

@@ -1,0 +1,14 @@
+BackEnd
+    - use mod uwsgi as application server for django
+    - considering using flaskrestful as API
+    
+
+    - planning the internal filestructure
+    - setup simple django project
+
+FrontEnd
+    - send request to backend 
+    - nginx as webserver
+
+
+Database
