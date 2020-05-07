@@ -2,12 +2,24 @@ version: '3'
 
 services:
     frontend:
-        build:
-            context: ./apache/
-            dockerfile: apache.Dockerfile
+        build: 
+            # apache
+            #context: ./apache/
+            #dockerfile: apache.Dockerfile
+
+            # niginx
+            context: ./nginx/
+            dockerfile: nginx.Dockerfile
+
+        container_name: django_webserver
+
         restart: always
         depends_on: 
             - backend
+
+        volumes: 
+            # nginx
+            - ./django/rest/:/usr/share/nginx/
 
         ports: 
             - '8080:80'
@@ -17,7 +29,9 @@ services:
         build:
             context: ./django/
             dockerfile: django.Dockerfile
+
         container_name: django_restapi
+
         restart: always
         depends_on: 
             - db
@@ -34,7 +48,9 @@ services:
         build:
             context: ./mariadb/
             dockerfile: mariadb.Dockerfile
+
         container_name: mariadb
+
         restart: always
 
         environment: 
