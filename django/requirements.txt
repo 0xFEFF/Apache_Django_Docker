@@ -1,4 +1,0 @@
-uwsgi
-django
-djangorestframework
-mysqlclient

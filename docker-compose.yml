@@ -3,46 +3,20 @@ version: '3'
 services:
     frontend:
         build: 
-            # apache
-            #context: ./apache/
-            #dockerfile: apache.Dockerfile
-
-            # niginx
-            context: ./nginx/
-            dockerfile: nginx.Dockerfile
+            context: ./apache/
+            dockerfile: apache.Dockerfile
 
         container_name: django_webserver
 
         restart: always
         depends_on: 
-            - backend
+            - db
 
         volumes: 
-            # nginx
-            - ./django/rest/:/usr/share/nginx/
+            - ./django/:/var/www/html/
 
         ports: 
             - '8080:80'
-
-
-    backend:
-        build:
-            context: ./django/
-            dockerfile: django.Dockerfile
-
-        container_name: django_restapi
-
-        restart: always
-        depends_on: 
-            - db
-
-        volumes:
-            #defining other save place
-            - ./django/rest/:/var/www/
-
-        stdin_open: true
-        tty: true
-
 
     db:
         build:
